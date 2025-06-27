@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container">
-      <h1>Vue Components Dashboard</h1>
+      <h1>Songthaew CNX Guide</h1>
       
       <!-- Navigation Buttons -->
       <div class="nav-buttons">
@@ -14,35 +14,12 @@
         >
           {{ component.label }}
         </button>
-        <button 
-          @click="showAll = !showAll"
-          :class="{ active: showAll }"
-          class="nav-btn show-all-btn"
-        >
-          {{ showAll ? 'Hide All' : 'Show All' }}
-        </button>
       </div>
 
       <!-- Component Display Area -->
       <div class="component-area">
-        <!-- Show All Components -->
-        <div v-if="showAll" class="all-components">
-          <div v-for="component in components" :key="component.name" class="component-section">
-            <h2>{{ component.label }}</h2>
-            <component :is="component.name"></component>
-          </div>
-        </div>
-
-        <!-- Show Single Component -->
-        <div v-else-if="activeComponent" class="single-component">
-          <h2>{{ getComponentLabel(activeComponent) }}</h2>
+        <div v-if="activeComponent" class="single-component">
           <component :is="activeComponent"></component>
-        </div>
-
-        <!-- Welcome Message -->
-        <div v-else class="welcome">
-          <h2>Welcome to Vue Components Dashboard</h2>
-          <p>Select a component from the buttons above to view it</p>
         </div>
       </div>
     </div>
@@ -54,6 +31,7 @@ import Booking from './components/Booking.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import Info from './components/Info.vue'
 import Map from './components/Map.vue'
+import Guilde from './components/Guilde.vue'
 
 export default {
   name: 'App',
@@ -61,13 +39,14 @@ export default {
     Booking,
     HelloWorld,
     Info,
-    Map
+    Map,
+    Guilde
   },
   data() {
     return {
-      activeComponent: null,
-      showAll: false,
+      activeComponent: 'Guilde',
       components: [
+        { name: 'Guilde', label: 'นำทาง & แนะนำเที่ยว' },
         { name: 'Booking', label: 'Booking System' },
         { name: 'HelloWorld', label: 'Hello World' },
         { name: 'Info', label: 'Information' },
@@ -86,7 +65,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Kanit', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -96,11 +75,11 @@ export default {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -110,22 +89,24 @@ h1 {
   padding: 30px 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  font-size: 2.5em;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 2.7em;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+  border-radius: 0 0 30px 30px;
 }
 
 .nav-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 20px;
+  gap: 12px;
+  padding: 24px 0 16px 0;
   background: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
   justify-content: center;
 }
 
 .nav-btn {
-  padding: 12px 24px;
+  padding: 14px 28px;
   border: none;
   border-radius: 25px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -133,93 +114,33 @@ h1 {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+  font-size: 1.1em;
 }
 
 .nav-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
 }
 
 .nav-btn.active {
   background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-}
-
-.show-all-btn.active {
-  background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
-  box-shadow: 0 4px 15px rgba(81, 207, 102, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
 .component-area {
-  padding: 30px;
-  min-height: 400px;
-}
-
-.component-section {
-  margin-bottom: 40px;
-  padding: 20px;
-  border: 2px solid #e9ecef;
-  border-radius: 10px;
-  background: #f8f9fa;
-}
-
-.component-section h2 {
-  margin-top: 0;
-  color: #495057;
-  border-bottom: 2px solid #667eea;
-  padding-bottom: 10px;
+  padding: 36px 24px 36px 24px;
+  min-height: 500px;
+  background: #f4f7fb;
 }
 
 .single-component {
-  padding: 20px;
+  padding: 24px;
   border: 2px solid #667eea;
-  border-radius: 10px;
-  background: #f8f9fa;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
 }
 
-.single-component h2 {
-  margin-top: 0;
-  color: #495057;
-  border-bottom: 2px solid #667eea;
-  padding-bottom: 10px;
-}
-
-.welcome {
-  text-align: center;
-  padding: 60px 20px;
-  color: #6c757d;
-}
-
-.welcome h2 {
-  color: #495057;
-  margin-bottom: 20px;
-}
-
-.welcome p {
-  font-size: 1.2em;
-  line-height: 1.6;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .nav-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .nav-btn {
-    width: 100%;
-    max-width: 250px;
-  }
-  
-  h1 {
-    font-size: 2em;
-    padding: 20px;
-  }
-  
-  .component-area {
-    padding: 20px;
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap');
 </style>

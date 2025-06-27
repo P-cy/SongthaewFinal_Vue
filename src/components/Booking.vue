@@ -80,11 +80,6 @@
 import { ref, reactive, computed, watch } from 'vue';
 import { GoogleMap, Marker, Polyline } from 'vue3-google-map';
 
-// --- ⚠️ START: การตั้งค่าและข้อมูลสำคัญ ⚠️ ---
-
-// !! สำคัญมาก !! ใส่ API Key ของคุณที่นี่
-// เพื่อความปลอดภัยสูงสุด ควรอ่านค่านี้มาจาก Environment Variable (.env)
-// แทนการ Hardcode โดยตรง
 const googleMapsApiKey = 'AIzaSyAYer7PyjzNfQS6ekM4xb25emuhFLl661U'; // <--- ใส่ Key ของคุณที่นี่
 
 // ตั้งค่าพิกัดเริ่มต้นของแผนที่ให้เป็นเชียงใหม่
