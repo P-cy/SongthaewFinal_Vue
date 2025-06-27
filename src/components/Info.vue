@@ -1,3 +1,31 @@
+<script setup>
+import { ref, computed } from 'vue'
+import icon from '../assets/icon.svg'
+import iconpng from '../assets/icon.png'
+
+// --- Reactive State ---
+const searchQuery = ref('')
+
+// Route data now includes a color property for the SVG
+const routes = ref([
+  { id: 2, name: 'สาย 2', destination: 'บ้านโคกฟันโปง - บ้านโคกน้อย', color: 'red' },
+  { id: 3, name: 'สาย 3', destination: 'บขส.3 - บ้านพรหมนิมิตร', color: 'red' },
+  { id: 4, name: 'สาย 4', destination: 'บขส.3 - บ้านหนองน้ำเกลี้ยง', color: 'green' },
+  { id: 5, name: 'สาย 5', destination: 'ตลาดหนองไผ่ล้อม - บ้านทุ่ม', color: 'green' },
+  { id: 6, name: 'สาย 6', destination: 'ตลาดเทศบาล 1 - บ้านเหล่านาดี', color: 'yellow' },
+  { id: 8, name: 'สาย 8', destination: 'บขส.3 - บ้านโคกท่า', color: 'yellow' }
+])
+
+// --- Computed Property for Filtering ---
+const filteredRoutes = computed(() => {
+  const query = searchQuery.value.toLowerCase()
+  if (!query) return routes.value
+  return routes.value.filter(route =>
+    route.name.toLowerCase().includes(query) ||
+    route.destination.toLowerCase().includes(query)
+  )
+})
+</script>
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8,17 +36,7 @@
     <header class="header">
       <div class="header-icon-wrapper">
         <!-- Embedded SVG for the header icon -->
-        <svg viewBox="0 0 100 50" preserveAspectRatio="xMidYMid meet">
-          <path d="M 8,25 C 8,20 12,16 17,16 H 75 C 80,16 84,20 84,25 V 40 H 8 Z" fill="#FFFFFF" stroke="#4A4E69" stroke-width="2"></path>
-          <path d="M 10,16 V 10 H 30 V 16" fill="none" stroke="#4A4E69" stroke-width="2"></path>
-          <rect x="12" y="28" width="10" height="5" fill="#4A4E69"></rect>
-          <rect x="25" y="28" width="10" height="5" fill="#4A4E69"></rect>
-          <rect x="38" y="28" width="10" height="5" fill="#4A4E69"></rect>
-          <rect x="51" y="28" width="10" height="5" fill="#4A4E69"></rect>
-          <rect x="64" y="28" width="10" height="5" fill="#4A4E69"></rect>
-          <circle cx="20" cy="42" r="4" fill="#333"></circle>
-          <circle cx="72" cy="42" r="4" fill="#333"></circle>
-        </svg>
+        <img :src="iconpng" width="60px">
       </div>
       <span class="header-text">สายรถสองแถว</span>
     </header>
@@ -36,15 +54,8 @@
       <div class="route-list">
         <div v-for="route in filteredRoutes" :key="route.id" class="route-card">
           <div class="route-card-content">
-            <!-- Route Icon (SVG) -->
-            <div class="route-icon">
-              <svg viewBox="0 0 100 50" preserveAspectRatio="xMidYMid meet">
-                 <path d="M 8,25 C 8,20 12,16 17,16 H 75 C 80,16 84,20 84,25 V 40 H 8 Z" :fill="route.color" stroke="#555" stroke-width="1"></path>
-                 <path d="M 10,16 V 10 H 30 V 16" fill="none" stroke="#555" stroke-width="1"></path>
-                 <rect x="12" y="28" width="60" height="5" fill="#FFFFFF" stroke="#DDD" stroke-width="0.5"></rect>
-                 <circle cx="20" cy="42" r="4" fill="#333"></circle>
-                 <circle cx="72" cy="42" r="4" fill="#333"></circle>
-              </svg>
+            <div class="route-icon" :style="{backgroundColor: route.color}">
+              <img :src="icon" class="img-icon">
             </div>
             <div class="route-info">
               <span class="route-name">{{ route.name }}</span>
@@ -58,36 +69,6 @@
     </main>
   </div>
 </template>
-
-<script setup>
-import { ref, computed } from 'vue';
-
-// --- Reactive State ---
-const searchQuery = ref('');
-
-// Route data now includes a color property for the SVG
-const routes = ref([
-  { id: 2, name: 'สาย 2', destination: 'บ้านโคกฟันโปง - บ้านโคกน้อย', color: '#FCE28A' }, // Yellow
-  { id: 3, name: 'สาย 3', destination: 'บขส.3 - บ้านพรหมนิมิตร', color: '#FCE28A' }, // Yellow
-  { id: 4, name: 'สาย 4', destination: 'บขส.3 - บ้านหนองน้ำเกลี้ยง', color: '#AED581' }, // Light Green
-  { id: 5, name: 'สาย 5', destination: 'ตลาดหนองไผ่ล้อม - บ้านทุ่ม', color: '#AED581' }, // Light Green
-  { id: 6, name: 'สาย 6', destination: 'ตลาดเทศบาล 1 - บ้านเหล่านาดี', color: '#66BB6A' }, // Green
-  { id: 8, name: 'สาย 8', destination: 'บขส.3 - บ้านโคกท่า', color: '#66BB6A' } // Green
-]);
-
-// --- Computed Property for Filtering ---
-const filteredRoutes = computed(() => {
-  const query = searchQuery.value.toLowerCase();
-  if (!query) {
-    return routes.value;
-  }
-  return routes.value.filter(route =>
-    route.name.toLowerCase().includes(query) ||
-    route.destination.toLowerCase().includes(query)
-  );
-});
-
-</script>
 
 <style scoped>
 
@@ -217,7 +198,9 @@ const filteredRoutes = computed(() => {
 
 .route-icon {
   width: 70px;
+  height: 70px;
   display: flex;
+  border-radius: 100%;
   flex-shrink: 0;
 }
 
@@ -240,6 +223,12 @@ const filteredRoutes = computed(() => {
 .route-arrow {
   font-size: 1.2rem;
   color: #AAAAAA;
+}
+
+.img-icon {
+  height: 70px;
+  width: 70px;
+  border-radius: 100%;
 }
 
 </style>
