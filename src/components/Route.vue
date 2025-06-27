@@ -1,3 +1,10 @@
+<script setup>
+import { ref, computed } from 'vue'
+import icon from '../assets/icon.svg'
+import iconpng from '../assets/icon.png'
+</script>
+
+
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,24 +20,6 @@
     </div>
 
     <!-- Bus Illustration -->
-    <div class="bus-container">
-      <div class="bus">
-        <div class="bus-front">
-          <div class="windshield"></div>
-          <div class="route-number">2</div>
-        </div>
-        <div class="bus-body">
-          <div class="windows">
-            <div class="window"></div>
-            <div class="window"></div>
-            <div class="window"></div>
-          </div>
-          <div class="door-indicator">🚪</div>
-        </div>
-        <div class="wheel wheel-front"></div>
-        <div class="wheel wheel-back"></div>
-      </div>
-    </div>
 
     <!-- Route Information -->
     <div class="route-info">
@@ -82,17 +71,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'BusRouteApp',
-  data() {
-    return {
-      // Component data can be added here if needed
-    }
-  }
-}
-</script>
-
 <style scoped>
 .bus-route-app {
   font-family: 'Sarabun', sans-serif;
@@ -135,119 +113,6 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-}
-
-/* Bus Illustration */
-.bus-container {
-  display: flex;
-  justify-content: center;
-  padding: 32px 16px;
-  background: white;
-}
-
-.bus {
-  position: relative;
-  width: 200px;
-  height: 80px;
-}
-
-.bus-front {
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 40px;
-  height: 60px;
-  background: #f1c40f;
-  border-radius: 8px 0 0 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.windshield {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 24px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 4px;
-}
-
-.route-number {
-  position: absolute;
-  bottom: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  color: #2c3e50;
-}
-
-.bus-body {
-  position: absolute;
-  left: 40px;
-  top: 0;
-  width: 120px;
-  height: 80px;
-  background: #f1c40f;
-  border-radius: 0 8px 8px 0;
-}
-
-.windows {
-  position: absolute;
-  top: 15px;
-  left: 8px;
-  display: flex;
-  gap: 4px;
-}
-
-.window {
-  width: 24px;
-  height: 16px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 2px;
-}
-
-.door-indicator {
-  position: absolute;
-  top: 35px;
-  left: 85px;
-  font-size: 12px;
-  background: #27ae60;
-  color: white;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-
-.wheel {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background: #2c3e50;
-  border-radius: 50%;
-  border: 3px solid #34495e;
-}
-
-.wheel::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, #7f8c8d 2px, transparent 2px);
-  background-size: 4px 4px;
-  border-radius: 50%;
-}
-
-.wheel-front {
-  left: 28px;
-  bottom: -12px;
-}
-
-.wheel-back {
-  right: 28px;
-  bottom: -12px;
 }
 
 /* Route Information */
