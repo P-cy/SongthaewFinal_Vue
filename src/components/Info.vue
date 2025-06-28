@@ -93,6 +93,7 @@ const filteredRoutes = computed(() => {
 
 #app-container {
   font-family: 'Sarabun', sans-serif;
+  width: 900px;
   max-width: 900px;
   margin: 0 auto;
   background-color: white;

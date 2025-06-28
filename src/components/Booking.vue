@@ -264,6 +264,7 @@ watch(isFlatRate, (val) => {
 
 <style scoped>
 .booking-form {
+  width: 900px;
   max-width: 900px;
   margin: 0 auto;
   padding: 32px 16px 16px 16px;

@@ -2,277 +2,233 @@
 import { ref, computed } from 'vue'
 import icon from '../assets/icon.svg'
 import iconpng from '../assets/icon.png'
+
+// --- Reactive State ---
+const searchQuery = ref('')
+
+// Route data now includes a color property for the SVG
+const routes = ref([
+  { id: 2, name: 'สาย 2', destination: 'บ้านโคกฟันโปง - บ้านโคกน้อย', color: 'red' },
+  { id: 3, name: 'สาย 3', destination: 'บขส.3 - บ้านพรหมนิมิตร', color: 'red' },
+  { id: 4, name: 'สาย 4', destination: 'บขส.3 - บ้านหนองน้ำเกลี้ยง', color: 'green' },
+  { id: 5, name: 'สาย 5', destination: 'ตลาดหนองไผ่ล้อม - บ้านทุ่ม', color: 'green' },
+  { id: 6, name: 'สาย 6', destination: 'ตลาดเทศบาล 1 - บ้านเหล่านาดี', color: 'yellow' },
+  { id: 8, name: 'สาย 8', destination: 'บขส.3 - บ้านโคกท่า', color: 'yellow' }
+])
+
+// --- Computed Property for Filtering ---
+const filteredRoutes = computed(() => {
+  const query = searchQuery.value.toLowerCase()
+  if (!query) return routes.value
+  return routes.value.filter(route =>
+    route.name.toLowerCase().includes(query) ||
+    route.destination.toLowerCase().includes(query)
+  )
+})
 </script>
-
-
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
-  <div class="bus-route-app">
-    <!-- Header -->
-    <div class="header">
-      <div class="nav-bar">
-        <button class="back-btn">‹</button>
-        <p class="route-title">สาย 2</p>
+  <div id="app-container">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="header-icon-wrapper">
+        <!-- Embedded SVG for the header icon -->
+        <img :src="iconpng" width="60px">
       </div>
-    </div>
+      <span class="header-text">สายรถสองแถว</span>
+    </header>
 
-    <!-- Bus Illustration -->
-
-    <!-- Route Information -->
-    <div class="route-info">
-      <h2 class="route-name">บ้านโคกพันโปง - บ้านโคกน้อย</h2>
-      
-      <div class="route-details">
-        <!-- <p class="route-label">เส้นทางจีง:</p> -->
-        <p class="route-text">
-          <b>เส้นทางวิ่ง:</b> บ้านโคกพันโปง - บ้านหัวพุง - บ้านคำใส - 
-          เซินทรัพพลาซ่าขอนแก่น - ศาลหลักเมือง - บขส.เก่า - 
-          รร.ขอนแก่นวิทยายน - ตลาดบางลำภู - ตลาดเทศบาล 1 - 
-          รร.กัลยาณวัตร - สถ.เมืองขอนแก่น - เซ็นโซ่ห์ - 
-          ไปรษณีย์ - วัดศรีจันทร์ - เรือนจำ - วิทยาลัยเทคนิค - 
-          รพ.ขอนแก่น - ม.ราชมงคล - ตลาดหนองไผ่ - บ้านพระคือ
-           - บ้านหนองไผ่ - บ้านหนองแสง - บ้านโคกน้อย
-        </p>
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2 class="section-title">ค้นหาสายรถ</h2>
+      <div class="search-container">
+        <!-- Make sure you have Font Awesome linked in your project for this icon -->
+        <i class="fas fa-search search-icon "></i>
+        <input type="text" v-model="searchQuery" class="search-input" placeholder="ตัวอย่าง: กัลยาณวัตร">
       </div>
 
-      <div class="fare-info">
-        <p><strong>อัตราค่าโดยสาร:</strong> 9-13 บาท</p>
-      </div>
-
-      <div class="schedule-info">
-        <p><strong>ช่วงเวลาดำเนินรถ:</strong> 06:00-19:00 น.</p>
-      </div>
-    </div>
-
-    <!-- Map Section -->
-    <div class="map-section">
-      <h3 class="map-title">แผนที่เส้นทางเดินรถสองแถว</h3>
-      <div class="map-container">
-        <div class="map-placeholder">
-          <div class="map-grid">
-            <div class="road horizontal road-1"></div>
-            <div class="road horizontal road-2"></div>
-            <div class="road horizontal road-3"></div>
-            <div class="road vertical road-4"></div>
-            <div class="road vertical road-5"></div>
-            <div class="landmark landmark-1">🏛️</div>
-            <div class="landmark landmark-2">🏫</div>
-            <div class="landmark landmark-3">🏥</div>
-            <div class="landmark landmark-4">🏪</div>
-            <div class="route-marker start">🚌</div>
-            <div class="route-marker end">🏁</div>
+      <!-- List of Bus Routes -->
+      <div class="route-list">
+        <div v-for="route in filteredRoutes" :key="route.id" class="route-card">
+          <div class="route-card-content">
+            <div class="route-icon" :style="{backgroundColor: route.color}">
+              <img :src="icon" class="img-icon">
+            </div>
+            <div class="route-info">
+              <span class="route-name">{{ route.name }}</span>
+              <span class="route-destination">{{ route.destination }}</span>
+            </div>
           </div>
+          <!-- Make sure you have Font Awesome linked for this icon -->
+          <i class="fas fa-chevron-right route-arrow"></i>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
 <style scoped>
-.bus-route-app {
+
+/*
+  IMPORTANT: For the icons to work, you MUST link to Font Awesome in your main public/index.html file.
+  Add this line inside the <head> section of your index.html:
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  And for the Thai font, add this in the <head> section as well:
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+*/
+
+:root {
+  --primary-color: #4A4E69; /* Dark blue-gray for header/active nav */
+  --background-color: #F8F9FA; /* Off-white for the main background */
+  --card-bg-color: #FFF9F2; /* Creamy color for cards */
+  --text-color: #22223B; /* Dark text */
+  --border-color: #EAEAEA; /* Light gray for borders */
+}
+
+#app-container {
   font-family: 'Sarabun', sans-serif;
   max-width: 420px;
   margin: 0 auto;
-  background: #f5f5f5;
-  font-family: 'Arial', sans-serif;
+  background-color: white;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 80px; /* Space for bottom nav */
+  color: var(--text-color);
 }
 
-/* Header Styles */
 .header {
-  background: #5a5a8a;
-  color: white;
-  padding: 0;
+  width: 370px;
+  background-color: #424578;
+  color: #f9c1f4;
+  padding: 1rem 1.5rem;
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: 700;
+  gap: 1rem;
 }
 
-.nav-bar {
+.header-text {
+  display: flex;
+  align-self: center;
+}
+
+.header-icon-wrapper {
+  width: 50px;
+  align-self: flex-start;
+  height: auto;
+}
+
+.main-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  background-color: var(--background-color);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.8rem;
+  border-radius: 16px;
+  border: 1px solid black;
+  font-size: 1rem;
+  background-color: white;
+  box-sizing: border-box;
+  color: black;
+}
+
+.search-input::placeholder {
+  color: #AAAAAA;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  font-size: 1.1rem;
+}
+
+.route-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.route-card {
+  background-color: var(--card-bg-color); 
+  border-radius: 12px;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  position: relative;
-}
-
-.back-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 28px;
-  font-weight: bold;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   cursor: pointer;
-  padding: 8px 16px;
-  margin-right: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.route-title {
-  font-size: 22px;
-  font-weight: bold;
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+.route-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.07);
 }
 
-/* Route Information */
+.route-card-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.route-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  border-radius: 100%;
+  flex-shrink: 0;
+}
+
 .route-info {
-  background: white;
-  padding: 20px;
-  margin: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .route-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: #8b4513;
-  text-align: center;
-  margin-bottom: 16px;
+  align-self: flex-start;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
-.route-label {
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 8px;
+.route-destination {
+  font-size: 0.85rem;
+  color: #666;
 }
 
-.route-text {
-  line-height: 1.6;
-  color: #34495e;
-  text-align: justify;
-  margin-bottom: 16px;
+.route-arrow {
+  font-size: 1.2rem;
+  color: #AAAAAA;
 }
 
-.fare-info, .schedule-info {
-  margin-bottom: 12px;
+.img-icon {
+  height: 70px;
+  width: 70px;
+  border-radius: 100%;
 }
 
-.fare-info p, .schedule-info p {
-  margin: 0;
-  color: #2c3e50;
-}
-
-/* Map Section */
-.map-section {
-  background: white;
-  padding: 20px;
-  margin: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.map-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.map-container {
-  width: 100%;
-  height: 300px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  background: #f8f9fa;
-}
-
-.map-placeholder {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
-              linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
-              linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
-              linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-}
-
-.map-grid {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.road {
-  position: absolute;
-  background: #34495e;
-}
-
-.road.horizontal {
-  height: 4px;
-  width: 80%;
-  left: 10%;
-}
-
-.road.vertical {
-  width: 4px;
-  height: 80%;
-  top: 10%;
-}
-
-.road-1 { top: 20%; }
-.road-2 { top: 50%; }
-.road-3 { top: 80%; }
-.road-4 { left: 30%; }
-.road-5 { left: 70%; }
-
-.landmark {
-  position: absolute;
-  font-size: 20px;
-  z-index: 2;
-}
-
-.landmark-1 { top: 15%; left: 25%; }
-.landmark-2 { top: 45%; left: 65%; }
-.landmark-3 { top: 75%; left: 25%; }
-.landmark-4 { top: 35%; left: 45%; }
-
-.route-marker {
-  position: absolute;
-  font-size: 16px;
-  z-index: 3;
-}
-
-.route-marker.start {
-  top: 10%;
-  left: 10%;
-}
-
-.route-marker.end {
-  bottom: 10%;
-  right: 10%;
-}
-
-/* Responsive Design */
-@media (max-width: 320px) {
-  .bus {
-    width: 160px;
-    height: 64px;
-  }
-  
-  .bus-front {
-    width: 32px;
-    height: 48px;
-  }
-  
-  .bus-body {
-    width: 96px;
-    height: 64px;
-  }
-  
-  .route-info {
-    padding: 16px;
-    margin: 12px;
-  }
-  
-  .route-name {
-    font-size: 16px;
-  }
-}
 </style>

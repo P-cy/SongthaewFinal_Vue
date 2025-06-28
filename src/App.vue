@@ -233,13 +233,13 @@ h1 {
   padding: 40px 30px;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
   min-height: 600px;
-  display: flex;
-  justify-content: center;
+  display: block;
 }
 
 .single-component {
-  width: 100%;
-  max-width: 800px;
+  width: 900px;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 30px;
   border: 2px solid rgba(102, 126, 234, 0.1);
   border-radius: 20px;
