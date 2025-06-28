@@ -1,20 +1,39 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import icon from '../assets/icon.svg'
 import iconpng from '../assets/icon.png'
+import songthaewData from '../assets/songthaew_lines.json'
 
 // --- Reactive State ---
+const router = useRouter()
 const searchQuery = ref('')
+const routes = ref([])
 
-// Route data now includes a color property for the SVG
-const routes = ref([
-  { id: 2, name: 'สาย 2', destination: 'บ้านโคกฟันโปง - บ้านโคกน้อย', color: '#FF6B6B' },
-  { id: 3, name: 'สาย 3', destination: 'บขส.3 - บ้านพรหมนิมิตร', color: '#FF8E53' },
-  { id: 4, name: 'สาย 4', destination: 'บขส.3 - บ้านหนองน้ำเกลี้ยง', color: '#4ECDC4' },
-  { id: 5, name: 'สาย 5', destination: 'ตลาดหนองไผ่ล้อม - บ้านทุ่ม', color: '#45B7D1' },
-  { id: 6, name: 'สาย 6', destination: 'ตลาดเทศบาล 1 - บ้านเหล่านาดี', color: '#96CEB4' },
-  { id: 8, name: 'สาย 8', destination: 'บขส.3 - บ้านโคกท่า', color: '#FFEAA7' }
-])
+// --- Color mapping for different songthaew colors ---
+const colorMap = {
+  'yellow': '#FFD700',
+  'orange': '#FF8C00', 
+  'blue': '#4169E1',
+  'white': '#F5F5F5',
+  'green': '#32CD32',
+  'red': '#DC143C'
+}
+
+// --- Load and process data ---
+onMounted(() => {
+  routes.value = songthaewData.map((route, index) => ({
+    id: index + 1,
+    name: route.name,
+    color: colorMap[route.color] || '#666666',
+    pickup: route.pickup,
+    service_time: route.service_time,
+    fare: route.fare,
+    destinations: route.destinations || [],
+    note: route.note || '',
+    key_stops: route.key_stops || []
+  }))
+})
 
 // --- Computed Property for Filtering ---
 const filteredRoutes = computed(() => {
@@ -22,9 +41,15 @@ const filteredRoutes = computed(() => {
   if (!query) return routes.value
   return routes.value.filter(route =>
     route.name.toLowerCase().includes(query) ||
-    route.destination.toLowerCase().includes(query)
+    route.pickup.some(stop => stop.toLowerCase().includes(query)) ||
+    route.destinations.some(dest => dest.toLowerCase().includes(query))
   )
 })
+
+// --- Navigation Method ---
+const navigateToRoute = (routeId) => {
+  router.push(`/route/${routeId}`)
+}
 </script>
 
 <template>
@@ -34,22 +59,11 @@ const filteredRoutes = computed(() => {
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <div id="app-container">
-    <!-- Background Gradient -->
-    <div class="background-gradient"></div>
-    
-    <!-- Header Section -->
-    <header class="header">
-     
-    </header>
-
     <!-- Main Content -->
     <main class="main-content">
       <!-- Search Section -->
       <section class="search-section">
-        <!-- <h2 class="section-title">
-          <i class="fas fa-search title-icon"></i>
-          ค้นหาสายรถ
-        </h2> -->
+        <h2 class="section-title">ค้นหาสายรถ</h2>
         <div class="search-container">
           <div class="search-input-wrapper">
             <i class="fas fa-search search-icon"></i>
@@ -57,7 +71,7 @@ const filteredRoutes = computed(() => {
               type="text" 
               v-model="searchQuery" 
               class="search-input" 
-              placeholder="ค้นหาสายรถหรือปลายทาง..."
+              placeholder="ค้นหาสายรถ, จุดรับ, หรือปลายทาง..."
             >
             <button v-if="searchQuery" @click="searchQuery = ''" class="clear-btn">
               <i class="fas fa-times"></i>
@@ -75,7 +89,7 @@ const filteredRoutes = computed(() => {
           </h3>
         </div>
 
-        <!-- List of Bus Routes -->
+        <!-- List of Songthaew Routes -->
         <div class="route-list">
           <transition-group name="route" tag="div">
             <div 
@@ -97,13 +111,25 @@ const filteredRoutes = computed(() => {
                       <i class="fas fa-route"></i>
                     </div>
                   </div>
-                  <div class="route-destination">
-                    <i class="fas fa-map-marker-alt destination-icon"></i>
-                    {{ route.destination }}
+                  <div class="route-details">
+                    <div class="route-pickup">
+                      <i class="fas fa-map-marker-alt pickup-icon"></i>
+                      <span class="pickup-text">{{ route.pickup.join(', ') }}</span>
+                    </div>
+                    <div class="route-time-fare">
+                      <span class="service-time">
+                        <i class="fas fa-clock"></i>
+                        {{ route.service_time }}
+                      </span>
+                      <span v-if="route.fare" class="fare">
+                        <i class="fas fa-money-bill-wave"></i>
+                        {{ route.fare }}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <button class="route-action-btn">
+              <button class="route-action-btn" @click="navigateToRoute(route.id)">
                 <i class="fas fa-chevron-right"></i>
               </button>
             </div>
@@ -127,31 +153,29 @@ const filteredRoutes = computed(() => {
 }
 
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --background-color: #f8fafc;
-  --card-bg-color: #ffffff;
-  --text-primary: #2d3748;
-  --text-secondary: #718096;
-  --border-color: #e2e8f0;
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --border-radius: 16px;
+  --primary-color: #4A4E69;
+  --background-color: #F8F9FA;
+  --card-bg-color: #FFF9F2;
+  --text-color: #22223B;
+  --border-color: #EAEAEA;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 8px 15px rgba(0,0,0,0.1);
+  --border-radius: 12px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #app-container {
   font-family: 'Sarabun', sans-serif;
-  max-width: 420px;
-  margin: 0 auto;
-  background-color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding-bottom: 80px; /* Space for bottom nav */
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(102,126,234,0.1);
   color: var(--text-color);
+  overflow: hidden;
 }
 
 .header {
@@ -160,44 +184,23 @@ const filteredRoutes = computed(() => {
   color: #f9c1f4;
   padding: 1rem 1.5rem;
   display: flex;
-  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
   gap: 1rem;
   align-items: center;
-  justify-content: center;
   border-radius: 12px 12px 0 0;
   margin-bottom: 1rem;
 }
 
+.header-text {
+  display: flex;
+  align-self: center;
+}
+
 .header-icon-wrapper {
-  position: relative;
-}
-
-.header-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  box-shadow: var(--shadow-lg);
-  background: white;
-  padding: 4px;
-}
-
-.header-text-wrapper {
-  flex: 1;
-}
-
-.header-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: white;
-  margin: 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.header-subtitle {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.9);
-  margin: 0.25rem 0 0 0;
-  font-weight: 400;
+  width: 50px;
+  align-self: flex-start;
+  height: auto;
 }
 
 .main-content {
@@ -217,52 +220,60 @@ const filteredRoutes = computed(() => {
   margin-bottom: 1.5rem;
 }
 
+.search-input-wrapper {
+  position: relative;
+}
+
 .search-input {
   width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
-  border-radius: 12px;
-  border: 2px solid var(--border-color);
+  padding: 0.8rem 1rem 0.8rem 2.8rem;
+  border-radius: 16px;
+  border: 1px solid black;
   font-size: 1rem;
-  background-color: #f7fafc;
+  background-color: white;
+  box-sizing: border-box;
+  color: black;
   transition: var(--transition);
-  color: var(--text-primary);
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #667eea;
-  background-color: white;
-  box-sizing: border-box;
-  color: black;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 78, 105, 0.1);
 }
 
 .search-input::placeholder {
-  color: var(--text-secondary);
+  color: #AAAAAA;
 }
 
 .search-icon {
   position: absolute;
   left: 1rem;
-  color: var(--text-secondary);
-  font-size: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  font-size: 1.1rem;
   z-index: 2;
 }
 
 .clear-btn {
   position: absolute;
   right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
-  color: var(--text-secondary);
+  color: #AAAAAA;
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 50%;
   transition: var(--transition);
+  z-index: 2;
 }
 
 .clear-btn:hover {
   background-color: #f1f5f9;
-  color: var(--text-primary);
+  color: var(--text-color);
 }
 
 .results-section {
@@ -283,11 +294,11 @@ const filteredRoutes = computed(() => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text-primary);
+  color: var(--text-color);
 }
 
 .route-icon-header {
-  color: #4ECDC4;
+  color: var(--primary-color);
 }
 
 .route-list {
@@ -298,7 +309,7 @@ const filteredRoutes = computed(() => {
 
 .route-card {
   background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -306,7 +317,7 @@ const filteredRoutes = computed(() => {
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: var(--transition);
 }
 
 .route-card:hover {
@@ -314,22 +325,41 @@ const filteredRoutes = computed(() => {
   box-shadow: var(--shadow-lg);
 }
 
-.route-card:hover::before {
-  transform: scaleX(1);
-}
-
 .route-card-content {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex: 1;
+}
+
+.route-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .route-icon {
   width: 70px;
   height: 70px;
   display: flex;
-  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.route-bus-icon {
+  width: 35px;
+  height: 35px;
+  filter: brightness(0) invert(1);
+}
+
+.route-line {
+  width: 4px;
+  height: 40px;
+  border-radius: 2px;
+  margin-left: 8px;
 }
 
 .route-info {
@@ -339,58 +369,111 @@ const filteredRoutes = computed(() => {
 
 .route-header {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 .route-name {
-  align-self: flex-start;
   font-weight: 700;
   font-size: 1rem;
+  color: var(--text-color);
+  flex: 1;
 }
 
-.route-destination {
+.route-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.route-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.route-pickup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.85rem;
   color: #666;
+}
+
+.pickup-icon {
+  color: #4ECDC4;
+  font-size: 0.8rem;
+}
+
+.pickup-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-time-fare {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.service-time, .fare {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .route-action-btn {
   background: none;
   border: none;
-  color: var(--text-secondary);
+  color: var(--text-color);
   font-size: 1.2rem;
   padding: 0.5rem;
   border-radius: 50%;
   cursor: pointer;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 .route-action-btn:hover {
   background-color: #f1f5f9;
-  color: var(--text-primary);
+  color: var(--primary-color);
   transform: translateX(2px);
 }
 
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
-  color: var(--text-secondary);
+  color: var(--text-color);
 }
 
 .empty-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
   opacity: 0.5;
+  color: var(--primary-color);
 }
 
 .empty-state h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: var(--text-color);
 }
 
 .empty-state p {
   font-size: 0.9rem;
   line-height: 1.5;
+  color: #666;
 }
 
 /* Animations */
@@ -410,37 +493,31 @@ const filteredRoutes = computed(() => {
 }
 
 /* Responsive adjustments */
-@media (min-width: 481px) {
-  .main-content {
-    padding: 0 2rem 2rem;
-  }
-  
-  .header {
-    padding: 2rem 2rem 1rem;
-  }
-  
-  .search-section,
-  .results-section {
-    padding: 2rem;
-  }
-}
-
 @media (max-width: 480px) {
   .main-content {
-    padding: 0 1rem 2rem;
-  }
-  
-  .search-section,
-  .results-section {
     padding: 1rem;
   }
   
   .header {
-    padding: 1.5rem 1rem 1rem;
+    padding: 1rem;
   }
   
-  .header-title {
-    font-size: 1.5rem;
+  .header-text {
+    font-size: 1.25rem;
+  }
+  
+  .route-card {
+    padding: 0.75rem;
+  }
+  
+  .route-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .route-bus-icon {
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

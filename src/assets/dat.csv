@@ -6,7 +6,7 @@ GRAPH ground,18.7983944,98.97118,คาเฟ่,https://encrypted-tbn0.gstatic.
 Kao Soy Nimman,18.79792,98.96928,อาหาร,https://www.mytravelbuzzg.com/wp-content/uploads/What-To-Eat-in-Khao-Soy-Nimman-e1713360258125.jpg
 Khun mor cuisine,18.7952333,98.9667974,อาหาร,https://media-cdn.tripadvisor.com/media/photo-s/0e/32/6b/2c/khun-mor-cuisine-2.jpg
 MORe SPACE,18.7945395,98.9641331,ตลาด,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR091KxB_JA_6Uk-5v0uKNfRLjdTjAyYCoHgQ&s
-One Nimman,18.8001106,98.9683099,ตลาด,https://res.cloudinary.com/pillarshotels/image/upload/f_auto/web/cms/resources/attractions/on-03-1500x1000-w1800h1360.jpeg
+One Nimman,18.8001106,98.9683099,ท่องเที่ยว,https://res.cloudinary.com/pillarshotels/image/upload/f_auto/web/cms/resources/attractions/on-03-1500x1000-w1800h1360.jpeg
 Ristr8to Original,18.79913,98.9672299,คาเฟ่,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlZZKljRoIZagfCvD6FrDXk6jc31mPXM1BeA&s
 SS1254372 Cafe,18.7949086,98.9684128,คาเฟ่,https://www.dozzdiy.com/wp-content/uploads/2016/10/DPF9984_fb.jpg
 The Barisotel by The Baristro,18.7976422,98.9679051,คาเฟ่,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg9y2BYflpf07_lkZ5wqv8gp25L_G8uM0Csw&s
@@ -18,28 +18,83 @@ Wat Phra That Doi Kham,18.7594385,98.9161392,วัด,https://catmotors.net/wp-
 Wat Chedi Luang Varavihara,18.7868148,98.9835159,วัด,https://images.squarespace-cdn.com/content/v1/5438e2c6e4b0b18459a8ca06/1593080023687-2WNKQ64LB63VEV4UMVZ4/GTJ-2020-0625-39.jpg
 Wat Duang Di,18.7876231,98.987293,วัด,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILW2ZK4GIGeBCc07vbWUO3Ln-l26WDi7Low&s
 Wat Dab Pai,18.7929884,98.9790457,วัด,https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/1b/60/85/caption.jpg?w=900&h=500&s=1
-CHOM Cafe & Restaurant,18.7484611,98.9453074,อาหาร,
-มีนา,18.7848595,99.0459596,อาหาร,
-Chaw Fah Talay Kram,18.77227658,98.96730702,อาหาร,
-Khaomao-Khaofang Restaurant,18.73013545,98.94366,อาหาร,
-Huen Jai Yong,18.725337,99.102821,อาหาร,
-The Good View Bar And Restaurant,18.79044117,99.00373779,อาหาร,
-เลิศรส,18.807973,99.003246,อาหาร,
-Ohkajhu,18.8405975,99.0246278,อาหาร,
-YANGZI JIANG,18.79848046,98.96803709,อาหาร,
-Wat Jed Yod,18.809025,98.97217697,วัด,
-Khuakai Nimman,18.7891788,98.9620027,อาหาร,
-Wat Lok Moli,18.7960243,98.9799926,วัด,
-Central Chiangmai,18.8062111,99.0180226,ตลาด,
-7-Eleven สาขาศิริมังคลาจารย์,18.7950127,98.9708298,อื่นๆ,
-7-Eleven สาขา นิมมานเหมินทร์ 2 (02999),18.7978789,98.9664661,อื่นๆ,
-7-Eleven สาขา หน้ากาดเชิงดอย (07930),18.7992,98.9610992,อื่นๆ,
-7-Eleven สาขาต้นพยอม 1 ,18.7907032,98.9615365,อื่นๆ,
-7-Eleven สาขาอบต.สุเทพ,18.79186,98.9584,อื่นๆ,
-7-Eleven สาขา ปตท.มหาลัยเชียงใหม่,18.7958576,98.9612088,อื่นๆ,
-The Good View Bar & Restaurant,18.7904208,99.0036427,อาหาร,
-Khao Soi Maesai,18.7995989,98.9752135,อาหาร,
-Chiang Mai Walking Street,18.7883329,98.9762807,ตลาด,
-Asama Coffee&Roastery,18.76507163,98.95307573,คาเฟ่,
-Fernpresso at Lake,18.76148466,98.93492488,คาเฟ่,
-Akha Ama Coffee,18.8031817,98.9800868,คาเฟ่,
+CHOM Cafe & Restaurant,18.7484611,98.9453074,อาหาร,https://www.chomcafeandrestaurant.com/wp-content/uploads/2024/04/IMG11.webp
+มีนา,18.7848595,99.0459596,อาหาร,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRAzu_7xGUxXXSzTT7C9l2L-SH5Ezb7W1URg&s
+Chaw Fah Talay Kram,18.77227658,98.96730702,อาหาร,https://img.wongnai.com/p/400x0/2016/08/09/eea7da7c171a4731be1a9cb686a411d2.jpg
+Khaomao-Khaofang Restaurant,18.73013545,98.94366,อาหาร,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRev101ydxZLvYD53jEhlg90_Yz4DI3fe2a3g&s
+Huen Jai Yong,18.725337,99.102821,อาหาร,https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/6c/dc/44/traditional-north-thai.jpg?w=900&h=500&s=1
+The Good View Bar And Restaurant,18.79044117,99.00373779,อาหาร,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNIFk5HkH-QdU0JIDwJ4iIo7MOqWGQ7ewtyQ&s
+เลิศรส,18.807973,99.003246,อาหาร,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbfxFLrYgEgeod3-qH68FH4xbRnBX-O_L9kA&s
+Ohkajhu,18.8405975,99.0246278,อาหาร,https://www.ohkajhu.com/storage/product/1695962722_0.jpg
+YANGZI JIANG,18.79848046,98.96803709,อาหาร,https://img.wongnai.com/p/1920x0/2022/04/15/b5e5aa818cdf4fd6924a763aa0c57259.jpg
+Wat Jed Yod,18.809025,98.97217697,วัด,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOx7-1Othd_bXdW4MFu1X7yrvc_Jf5LEEgAQ&s
+Khuakai Nimman,18.7891788,98.9620027,อาหาร,https://img.wongnai.com/p/1920x0/2022/07/04/417903cf769a41c3b5ae4a8b1604118d.jpg
+Wat Lok Moli,18.7960243,98.9799926,วัด,https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/%282020%29_%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B9%82%E0%B8%A5%E0%B8%81%E0%B9%82%E0%B8%A1%E0%B8%AC%E0%B8%B5_%E0%B8%AD.%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87_%E0%B8%88.%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88_%281%29.jpg/1200px-%282020%29_%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B9%82%E0%B8%A5%E0%B8%81%E0%B9%82%E0%B8%A1%E0%B8%AC%E0%B8%B5_%E0%B8%AD.%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87_%E0%B8%88.%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88_%281%29.jpg
+Central Chiangmai,18.8062111,99.0180226,อื่นๆ,https://www.central.co.th/adobe/dynamicmedia/deliver/dm-aid--86731fd4-3fe7-45bc-9d3c-2224bed60f42/10136-central-festival-chiangmai.jpg?quality=60&width=1024&preferwebp=true
+7-Eleven สาขาศิริมังคลาจารย์,18.7950127,98.9708298,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/2425-7-11--Sirimangkalajan-branch-/place2425_IMG_20211003_1749450.jpg
+7-Eleven สาขา นิมมานเหมินทร์ 2 (02999),18.7978789,98.9664661,อื่นๆ,https://www.cmhy.city/uploads/photos/--Shop/-----eleven/-----------Nimman------All-Cafe-/place2366_IMG_20200502_1709116.jpg
+7-Eleven สาขา หน้ากาดเชิงดอย (07930),18.7992,98.9610992,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/7200-7-11-Gad-Choeng-Doi/place7200_IMG_20211107_1641099.jpg
+7-Eleven สาขาต้นพยอม 1 ,18.7907032,98.9615365,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/7314-7-11--Tom-Payom-/place7314_WP_20200909_13_58_45_Pro.jpg
+7-Eleven สาขาอบต.สุเทพ,18.79186,98.9584,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/2588-7-11--Suthep-branch-/place2588_IMG_20210610_1304130.jpg
+7-Eleven สาขา ปตท.มหาลัยเชียงใหม่,18.7958576,98.9612088,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/3359-7-11--ptt-cmu-/place3359_IMG_20211107_1704566.jpg
+The Good View Bar & Restaurant,18.7904208,99.0036427,อาหาร,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNIFk5HkH-QdU0JIDwJ4iIo7MOqWGQ7ewtyQ&s
+Khao Soi Maesai,18.7995989,98.9752135,อาหาร,https://axwwgrkdco.cloudimg.io/v7/__gmpics3__/47168a2ec6df46f9998943338efe4342.jpeg?width=1000
+Chiang Mai Walking Street,18.7883329,98.9762807,ตลาด,https://www.google.com/url?sa=i&url=https%3A%2F%2Fthesmartlocal.co.th%2Fchiang-mai-walking-streets%2F&psig=AOvVaw3ycHT0FU5w77ytObrKvxZk&ust=1751137941728000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC2jamnko4DFQAAAAAdAAAAABAU
+Asama Coffee&Roastery,18.76507163,98.95307573,คาเฟ่,https://img.wongnai.com/p/1920x0/2022/08/01/08d48817e54a4f38a58b943b0922fe12.jpg
+Fernpresso at Lake,18.76148466,98.93492488,คาเฟ่,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ckoDS5aX1_d07IXeJ1DOy_JpwXLS7z9JsA&s
+Akha Ama Coffee,18.8031817,98.9800868,คาเฟ่,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnRFI0cxqP3O9i5pyxR_KvWdD6FHecRkEY3w&s
+Doi Inthanon,18.587797,98.486963,ท่องเที่ยว,https://image-tc.galaxy.tf/wijpeg-sxrfid5inslt46adwg0pwpho/intanon.jpg
+ประตูท่าแพ,18.78790295,98.99310842,ท่องเที่ยว,https://cms.dmpcdn.com/travel/2020/08/27/10a8e2c0-e851-11ea-b44e-55f30e5b90d7_original.JPG
+สวนพฤกษศาสตร์สมเด็จพระนางเจ้าสิริกิติ์,18.8880345,98.8592938,ท่องเที่ยว,https://mychiangmaitour.com/wp-content/images/attractions/botanic_garden01.jpg
+ถนนคนเดินท่าแพ,18.7877834,98.992803,ท่องเที่ยว,https://roijang.com/wp-content/uploads/2023/08/shutterstock_2230075667.jpg
+"ม่อนแจ่ม",18.9357695,98.8198452,ท่องเที่ยว,https://tiewkan.com/upload/2023/05/cc8180896.jpg
+Grand Canyon Chiang Mai,18.696719,98.8881996,ท่องเที่ยว,https://itsbetterinthailand.com/wp-content/uploads/2019/12/Grand-Canyon-cover-1800x1013.jpg
+Wat Umong,18.7827263,98.9521099,วัด,https://www.aleenta.com/wp-content/uploads/Wat-Umong-Suan-Phutthatham.jpg
+สวนสัตว์เชียงใหม่,18.8097074,98.9469395,ท่องเที่ยว,https://www.khaosod.co.th/wpapp/uploads/2024/11/panda.jpg
+เชียงใหม่ไนท์ซาฟารี,18.7423503,98.9173241,ท่องเที่ยว,https://www.marariversafarilodge.com/wp-content/uploads/2023/07/Night-safari-expedition.jpg
+"อุทยานแห่งชาติน้ำตกบัวตอง-น้ำพุเจ็ดสี",19.0691986,99.076916,ท่องเที่ยว,https://thailandtravel.app/media/img/CorUlKdQzA9UDHkZGSHU34RVL4aIGx0Z.jpg
+Warorot Market,18.7898494,99.0009964,ตลาด,https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Warorot_Market_01.jpg/960px-Warorot_Market_01.jpg
+เส้นทางศึกษาธรรมชาติผาดอกเสี้ยว,18.5409389,98.5261446,ท่องเที่ยว,https://s359.kapook.com/pagebuilder/42ad8428-99ff-4cef-95da-76f6a9a8fd50.jpg
+I Love Flower Farm,18.8977721,98.9806351,ท่องเที่ยว,https://chillpainai.com/storage/scoop/15718/i-love-flower-farm-48.jpg
+อ่างแก้ว,18.8059401,98.9483254,ท่องเที่ยว,https://thumbs.dreamstime.com/b/ang-kaew-chiang-mai-university-thailand-lake-58245772.jpg
+ทุ่งดอกเก๊กฮวย,18.5689473,98.0873327,ท่องเที่ยว,https://travel.mthai.com/app/uploads/2019/10/73220680_755467151547273_2165235881705734144_n.jpg
+สวนดอกไม้ป้านกเอี้ยง,18.894633,98.978929,ท่องเที่ยว,https://i.ytimg.com/vi/nQRpq0E8k3c/maxresdefault.jpg
+ดอยแม่โถ,18.238704,98.181499,ท่องเที่ยว,https://cms.dmpcdn.com/travel/2020/11/25/7a753c20-2ed4-11eb-8c49-6ff1aae212a5_original.jpg
+สวนส้มจินจู,18.9513122,98.8025294,ท่องเที่ยว,https://miro.medium.com/v2/resize:fit:1400/1*I6mUlXKcspOvPbZz_UpZdg.jpeg
+7-Eleven สาขา 12 ห้วยแก้ว,18.797557,98.975905,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/4546-7-11-hueaykwaw-branch/place4546_IMG_20200705_1742120.jpg
+7-Eleven สาขา กาดก้อม,18.77438,98.99033,อื่นๆ,https://www.cmhy.city/uploads/photos/--Shop/-----eleven/------------Suriyawong---/place12057_IMG_20200407_1746519.jpg
+7-Eleven สาขา คลองแม่ข่า,18.777381,98.995556,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-11-Convenience-Store/37342-7-11--Krong-Mae-Ka-/place37342_IMG_20240303_1803151.jpg
+7-Eleven สาขา ศรีปิงเมือง 2,18.77264,98.99345,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/4025-7-11--Sriping-Moung-2-/place4025_IMG_20211119_1736453.jpg
+7-Eleven สาขา วัดพระสิงห์,18.78851,98.98292,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-11-Convenience-Store/34-7-11-Phasing/place34_IMG_20230128_1706106.jpg
+7-Eleven สาขา มูลเมือง 2,18.78628,98.99302,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-11-Convenience-Store/15519-------Monmung---/place15519_IMG_20210314_1559572.jpg
+7-Eleven สาขา สามกษัตริย์,18.79132,98.9877,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/161-7-11--Three-King-/place161_IMG_20211030_1545433.jpg
+7-Eleven สาขา ราชวิถี,18.790409,98.991658,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/7965-7-11--Rajvithi-branch-/place7965_IMG_20201120_1541484.jpg
+7-Eleven สาขา ประตูสวนดอก,18.78984,98.97832,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/610-7-11-Saundok-Branch/place610_IMG_20210620_1828544.jpg
+7-Eleven สาขา ช้างคลานพลาซ่า,18.77719,98.99942,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/2070-7-11-chang-kan-plaza/place2070_WP_20200906_15_15_56_Pro.jpg
+7-Eleven สาขา ถนนท่าแพซอย 4,18.788102,98.996178,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-11-Convenience-Store/20647-------Thaphae-Soi---/place20647_IMG20250407174636.jpg
+7-Eleven สาขา สิงหราช,18.792072,98.981912,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/396-7-11-Sinkharaj/place396_IMG_20210104_1731187.jpg
+7-Eleven สาขา แยกสนามบิน 2,18.76791,98.97681,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/8192-7-11--Airport-2-/place8192_IMG_20210321_1617350.jpg
+7-Eleven สาขา เชียงใหม่แลนด์ 1,18.77278,98.9991,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/2137-7-11--Chiangmai-land-branch-/place2137_IMG_20210731_1707149.jpg
+7-Eleven สาขา สมเพชร,18.791124,98.99384,อื่นๆ,https://www.cmhy.city/uploads/photos/6-Shop/93-7-eleven/287-seven-Sompet/place287_IMG_20200721_1839533.jpg
+ขุนช่างเคี่ยน,18.8412389,98.8999497,ท่องเที่ยว,https://img.kapook.com/u/2023/sireeporn/Travel-01/Khun%20Chang%20Khian_04.jpg
+สวนสนบ่อแก้ว,18.1562962,98.3884981,ท่องเที่ยว,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrMyBkmTP4HAS29j8rUX_tRsLdcb2wB2NRgQ&s
+อ่างกา,18.5884542,98.4835247,ท่องเที่ยว,https://medias.thansettakij.com/uploads/images/contents/w1024/2023/09/MziRnKYqV9Rg5oy8K6sG.webp?x-image-process=style/lg-webp
+"อุทยานแห่งชาติน้ำตกบัวตอง-น้ำพุเจ็ดสี",19.0691986,99.0769106,ท่องเที่ยว,https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/e2/f5/56/beautiful-relatively.jpg?w=2000&h=-1&s=1
+"อุทยานหลวงราชพฤกษ์",18.7445479,98.9254359,ท่องเที่ยว,"https://res.cloudinary.com/eddypisit/image/upload/c_fill,h_280,w_548/bf1pfzizq6cvy3vrz8ii"
+อุทยานแห่งชาติแม่วาง,18.5265723,98.7516846,ท่องเที่ยว,https://cdn1.productnation.co/stg/sites/6/6476ec040ab4c.jpg
+วัดเจดีย์เหลี่ยม,18.6610354,98.7889292,ท่องเที่ยว,https://www.renown-travel.com/images/wat-chedi-liam-chedi-l.jpg
+น้ำตกแม่สา,18.9061728,98.8972549,ท่องเที่ยว,https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/92/bf/c4/mae-sa-wasserfalle.jpg?w=1400&h=800&s=1
+"วัดพระพุทธบาทสี่รอย",19.0166923,98.7597323,วัด,http://www.papaiwat.com/th/file/get/file/20200507e7ef768963460cf07478556bc9999098191652.jpg
+วัดถ้ำเชียงดาว,19.393704,98.9260161,วัด,https://img.wongnai.com/p/1920x0/2021/03/06/3fe0caeacef7440699c148ff2e71f224.jpg
+หอศิลปวัฒนธรรมเมืองเชียงใหม่,18.7817696,98.9648006,ท่องเที่ยว,https://www.fun-d.net/wp-content/uploads/2022/08/Chiang-Mai-City-Arts-and-Cultural-Center-1.jpg
+น้ำตกสิริภูมิ,18.5469576,98.5122364,ท่องเที่ยว,https://img.wongnai.com/p/1600x0/2018/12/13/323c1ccc01f84843bc66c7e3712e3973.jpg
+TOMATO HOUSE,18.8360795,99.0073194,คาเฟ่,https://lh3.googleusercontent.com/gps-cs-s/AC9h4no7T8VWdNli0gXmqN4OMP3iGPja7bNUhCCglTarx7i7mrbsUBz47oxf0drPGTnl2KvqbLxDuCnSFQ9SPrniCKKHFrR6EcqOyb9lQGt0Qwb9fELKaaFhUn3pyylqT-CLlofcbm-T=w289-h312-n-k-no
+Woo Cafe-Art Gallery-Lifestyle Shop,18.791728,99.0005609,ท่องเที่ยว,https://img.wongnai.com/p/1920x0/2023/02/20/f7cc01d69047419e93298ad897a059b7.jpg
+Koff & Things,18.780982,98.9867875,คาเฟ่,https://pbs.twimg.com/media/FH0q233VQAUdwXM?format=jpg&name=large
+Youngfolk at Club Carving CNX,18.7613566,98.9704818,คาเฟ่,https://cms.dmpcdn.com/food/2022/03/23/cdd825b0-aa90-11ec-9b91-03afdbb2e824_original.jpg
+"ฟ้าธาราคอฟฟี่",18.7930788,98.9863608,คาเฟ่,https://lh3.googleusercontent.com/p/AF1QipN8Z9JYHIVods74kICUBG9TFl9_IM3KSM7VrQj3=w408-h484-k-no
+Blue & Teak eatery. Stay. Space,18.7930785,98.978636,คาเฟ่,https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqGQtU8dbJQ-QqVYfyMI8g3Q6Z_F7peRdUW1pB49JWKAS0uQJbKfloK0qAfS948ZkBFbG0GyOCXMcE-zsIYdpDJY98sT4iyvAOkq7yFX170lWgyWLM17qtd19SKSvFa1HfrvBinAQ=w408-h544-k-no
+Carrot Coffee,18.7825962,98.9847983,คาเฟ่,https://cms.dmpcdn.com/food/2022/03/14/f7137e40-a34a-11ec-8aa3-47ea2543bc43_webp_original.jpg
+Hiding,18.7841174,98.9653725,คาเฟ่,https://cms.dmpcdn.com/food/2022/03/23/e91bce60-aa97-11ec-9b91-03afdbb2e824_original.jpg
+FOHHIDE,18.7987423,98.968686,คาเฟ่,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKhB7HGDjYLnrpaOvi47S2DrhdniBSvPGNiA&s
+The Baristro at Ping River,18.81582,98.9976751,คาเฟ่,https://lh3.googleusercontent.com/p/AF1QipPCBks8rmdC7jR0IBWRUsU2dbfvtNKW7jr6Sh2X=w408-h544-k-no

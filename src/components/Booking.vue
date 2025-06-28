@@ -1,5 +1,11 @@
 <template>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <div class="booking-form">
+    <h2 class="section-title">เรียกรถแดง</h2>
     <GoogleMap
       :api-key="googleMapsApiKey"
       :center="mapCenter"
@@ -264,18 +270,25 @@ watch(isFlatRate, (val) => {
 
 <style scoped>
 .booking-form {
-  width: 900px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 32px 16px 16px 16px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 6px 32px rgba(102,126,234,0.13);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(102,126,234,0.1);
+  font-family: 'Sarabun', sans-serif;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .details-panel {
   margin-top: 20px;
-  padding: 30px;
+  padding: 20px;
   background: #f8f9fa;
   border-radius: 12px;
   border: 1px solid #e9ecef;

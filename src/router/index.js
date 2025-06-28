@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// Import component หลักที่อาจจะเป็นหน้า Home หรือแผนที่
-import MapView from '../components/Map.vue'
 
 const routes = [
   {
+    path: '/',
+    redirect: '/map'
+  },
+  {
     path: '/map',
     name: 'Map',
-    component: () => import('../components/Map.vue')
+    component: () => import('../components/Guilde.vue')
   },
   {
     path: '/booking',
@@ -20,16 +22,15 @@ const routes = [
     name: 'Info',
     component: () => import('../components/Info.vue')
   },
-  // คุณสามารถเพิ่ม Route สำหรับ HelloWorld หรือ Component อื่นๆ ได้ที่นี่
   {
-    path: '/hello',
-    name: 'HelloWorld',
-    component: () => import('../components/HelloWorld.vue')
-  }
+    path: '/route/:id',
+    name: 'Route',
+    component: () => import('../components/Route.vue')
+  },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 

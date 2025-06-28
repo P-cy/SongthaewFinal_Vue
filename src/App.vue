@@ -12,56 +12,43 @@
       <!-- Navigation Buttons -->
       <nav class="nav-section">
         <div class="nav-buttons">
-          <button 
+          <router-link 
             v-for="component in components" 
             :key="component.name"
-            @click="activeComponent = component.name"
-            :class="{ active: activeComponent === component.name }"
-            class="nav-btn"
+            :to="component.path"
+            custom
+            v-slot="{ navigate, isActive }"
           >
-            <span class="btn-icon">{{ component.icon }}</span>
-            <span class="btn-text">{{ component.label }}</span>
-          </button>
+            <button 
+              @click="navigate"
+              :class="{ active: isActive }"
+              class="nav-btn"
+            >
+              <span class="btn-icon">{{ component.icon }}</span>
+              <span class="btn-text">{{ component.label }}</span>
+            </button>
+          </router-link>
         </div>
       </nav>
 
-      <!-- Component Display Area -->
+      <!-- Router View -->
       <main class="component-area">
-        <div v-if="activeComponent" class="single-component">
-          <component :is="activeComponent"></component>
-        </div>
+        <router-view></router-view>
       </main>
     </div>
   </div>
 </template>
 
 <script>
-import Booking from './components/Booking.vue'
-import Info from './components/Info.vue'
-import Guilde from './components/Guilde.vue'
-import Route from './components/Route.vue'
-
 export default {
   name: 'App',
-  components: {
-    Booking,
-    Info,
-    Guilde,
-  },
   data() {
     return {
-      activeComponent: 'Guilde',
       components: [
-        { name: 'Guilde', label: 'นำทาง & แนะนำเที่ยว', icon: '🗺️' },
-        { name: 'Booking', label: 'Booking System', icon: '📅' },
-        { name: 'Info', label: 'Information', icon: 'ℹ️' },
+        { name: 'Guilde', label: 'นำทาง & แนะนำเที่ยว', icon: '🗺️', path: '/map' },
+        { name: 'Booking', label: 'Booking System', icon: '📅', path: '/booking' },
+        { name: 'Info', label: 'Information', icon: 'ℹ️', path: '/info' },
       ]
-    }
-  },
-  methods: {
-    getComponentLabel(componentName) {
-      const component = this.components.find(c => c.name === componentName)
-      return component ? component.label : componentName
     }
   }
 }
@@ -77,27 +64,25 @@ export default {
 }
 
 #app {
-  font-family: 'Kanit', 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Sarabun', sans-serif;
   color: #2c3e50;
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   background-attachment: fixed;
-  padding: 20px;
+  padding: 0;
 }
 
 .container {
+  width: 1200px;
   max-width: 1200px;
-  min-height: calc(100vh - 40px);
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 25px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
 }
 
 /* Header Styles */
@@ -205,14 +190,13 @@ h1 {
 }
 
 .nav-btn:hover {
-  transform: translateY(-5px) scale(1.05);
+  transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
 }
 
 .nav-btn.active {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
 }
 
 .btn-icon {
@@ -227,75 +211,42 @@ h1 {
   line-height: 1.2;
 }
 
-/* Component Area Styles */
+/* Component Area */
 .component-area {
-  flex: 1;
-  padding: 40px 30px;
+  width: 1160px;
+  padding: 20px;
+  overflow-y: auto;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  min-height: 600px;
-  display: block;
+  min-height: calc(100vh - 200px);
+  position: relative;
 }
 
 .single-component {
-  width: 900px;
-  max-width: 900px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 30px;
-  border: 2px solid rgba(102, 126, 234, 0.1);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.single-component:hover {
-  border-color: rgba(102, 126, 234, 0.3);
-  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
-}
-
-/* Ensure all child components have consistent width */
-.single-component > * {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-/* Override any component-specific max-width */
-.single-component .guilde-container,
-.single-component .booking-form,
-.single-component #app-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-}
-
-/* Footer Styles */
-.app-footer {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9em;
-  font-weight: 300;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  #app {
-    padding: 10px;
-  }
-  
   .container {
+    max-width: 100%;
     border-radius: 15px;
   }
   
+  .app-header {
+    padding: 30px 20px;
+  }
+  
   h1 {
-    font-size: 2.2em;
-    letter-spacing: 2px;
+    font-size: 2.5em;
   }
   
   .subtitle {
     font-size: 1em;
+  }
+  
+  .nav-section {
+    padding: 20px 15px;
   }
   
   .nav-buttons {
@@ -316,12 +267,7 @@ h1 {
   }
   
   .component-area {
-    padding: 20px 15px;
-  }
-  
-  .single-component {
-    padding: 20px;
-    max-width: 100%;
+    padding: 15px;
   }
 }
 
@@ -333,51 +279,11 @@ h1 {
   
   .nav-btn {
     width: 100%;
-    max-width: 280px;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
+    max-width: 200px;
   }
   
   h1 {
-    font-size: 1.8em;
+    font-size: 2em;
   }
-  
-  .logo-icon {
-    font-size: 3em;
-  }
-  
-  .component-area {
-    padding: 15px 10px;
-  }
-  
-  .single-component {
-    padding: 15px;
-    border-radius: 15px;
-  }
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
 }
 </style>

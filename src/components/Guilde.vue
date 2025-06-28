@@ -1,6 +1,11 @@
 <template>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <div class="guilde-container">
-    <h2>นำทางด้วยแผนที่สองแถว</h2>
+    <h2 class="section-title">นำทางด้วยแผนที่สองแถว</h2>
     <div class="map-instruction">
       <span v-if="!startPoint">คลิกเลือกจุดเริ่มต้นบนแผนที่</span>
       <span v-else-if="!endPoint">เลือกสถานที่ท่องเที่ยวปลายทาง</span>
@@ -913,14 +918,22 @@ export default {
 
 <style scoped>
 .guilde-container {
-  width: 900px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 32px 16px 16px 16px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 6px 32px rgba(102,126,234,0.13);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(102,126,234,0.1);
+  font-family: 'Sarabun', sans-serif;
 }
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
 .map-instruction {
   display: flex;
   align-items: center;
@@ -951,18 +964,15 @@ export default {
   margin-bottom: 24px;
 }
 .result-section {
-  display: flex;
-  gap: 32px;
   margin-bottom: 24px;
-  flex-wrap: wrap;
 }
 .route-info, .songthaew-info {
-  flex: 1 1 220px;
   background: #f4f7fb;
   border-radius: 12px;
   padding: 18px 20px;
   box-shadow: 0 2px 8px rgba(102,126,234,0.07);
   margin-bottom: 12px;
+  width: 100%;
 }
 .route-info h3, .songthaew-info h3 {
   margin-top: 0;
