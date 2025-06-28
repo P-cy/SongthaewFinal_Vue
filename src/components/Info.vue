@@ -93,7 +93,7 @@ const filteredRoutes = computed(() => {
 
 #app-container {
   font-family: 'Sarabun', sans-serif;
-  max-width: 420px;
+  max-width: 900px;
   margin: 0 auto;
   background-color: white;
   min-height: 100vh;
@@ -102,17 +102,24 @@ const filteredRoutes = computed(() => {
   position: relative;
   padding-bottom: 80px; /* Space for bottom nav */
   color: var(--text-color);
+  padding: 32px 16px 16px 16px;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(102,126,234,0.13);
 }
 
 .header {
-  width: 370px;
+  width: 100%;
   background-color: #424578;
   color: #f9c1f4;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 2rem;
   display: flex;
   font-size: 1.5rem;
   font-weight: 700;
   gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 1rem;
 }
 
 .header-text {
@@ -127,20 +134,24 @@ const filteredRoutes = computed(() => {
 }
 
 .main-content {
-  padding: 1.5rem;
+  padding: 2rem;
   flex-grow: 1;
   background-color: var(--background-color);
+  width: 100%;
+  border-radius: 0 0 12px 12px;
 }
 
 .section-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .search-container {
   position: relative;
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .search-input {
@@ -152,6 +163,7 @@ const filteredRoutes = computed(() => {
   background-color: white;
   box-sizing: border-box;
   color: black;
+  height: 50px;
 }
 
 .search-input::placeholder {
@@ -171,18 +183,21 @@ const filteredRoutes = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  width: 100%;
 }
 
 .route-card {
   background-color: var(--card-bg-color); 
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  min-height: 80px;
 }
 
 .route-card:hover {
@@ -193,31 +208,37 @@ const filteredRoutes = computed(() => {
 .route-card-content {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  flex: 1;
 }
 
 .route-icon {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
   display: flex;
-  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
 .route-info {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
 }
 
 .route-name {
-  align-self: flex-start;
+  font-size: 1.3em;
   font-weight: 700;
-  font-size: 1rem;
+  color: var(--text-color);
 }
 
 .route-destination {
-  font-size: 0.85rem;
+  font-size: 1.1em;
   color: #666;
+  line-height: 1.4;
 }
 
 .route-arrow {

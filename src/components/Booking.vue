@@ -34,8 +34,14 @@
           <label for="people">จำนวนคน</label>
           <div class="people-input">
             <button @click="updatePeople(-1)" :disabled="numberOfPeople <= 1">-</button>
-            <input type="number" id="people" v-model.number="numberOfPeople" min="1" max="8" readonly />
-            <button @click="updatePeople(1)" :disabled="numberOfPeople >= 8">+</button>
+            <input type="number" id="people" v-model.number="numberOfPeople" :min="1" :max="maxPeople" readonly />
+            <button @click="updatePeople(1)" :disabled="numberOfPeople >= maxPeople">+</button>
+          </div>
+          <div class="flat-rate-toggle">
+            <label>
+              <input type="checkbox" v-model="isFlatRate" />
+              เหมาจ่าย 130 บาท (สูงสุด 12 คน)
+            </label>
           </div>
         </div>
         <div class="price-summary">
@@ -98,36 +104,21 @@ const tripDetails = reactive({
 const routePolyline = ref(null);
 const numberOfPeople = ref(1);
 const paymentMethod = ref('Cash');
+const isFlatRate = ref(false); // เพิ่ม state สำหรับเหมาจ่าย
 
 const mapRef = ref(null); // Reference to the map component instance
 
 // --- Computed Properties ---
 const isRouteCalculated = computed(() => !!tripDetails.distance);
 
+const maxPeople = computed(() => (isFlatRate.value ? 12 : 8));
+
 const rawTotalPrice = computed(() => {
-  if (!tripDetails.distanceValue) return 0;
-
-  const distanceInKm = tripDetails.distanceValue / 1000;
-  let price = 0;
-
-  // --- Define your total price logic here ---
-  // This logic determines the *total* fare, regardless of people count initially.
-  // The per-person price will be derived from this total.
-
-  const BASE_FARE = 60; // Base fare for the ride
-  const PER_KM_RATE = 10; // Additional cost per kilometer after a certain distance
-  const BASE_KM_INCLUDED = 2; // Kilometers included in the base fare
-
-  if (distanceInKm <= BASE_KM_INCLUDED) {
-    price = BASE_FARE;
-  } else {
-    price = BASE_FARE + (distanceInKm - BASE_KM_INCLUDED) * PER_KM_RATE;
+  if (isFlatRate.value) {
+    return 130;
   }
-
-  // Ensure total doesn't go below minimum, and round up to nearest 5
-  return Math.ceil(Math.max(BASE_FARE, price) / 5) * 5;
+  return numberOfPeople.value * 15;
 });
-
 
 const formattedTotalPrice = computed(() => {
   return new Intl.NumberFormat('th-TH', {
@@ -139,14 +130,19 @@ const formattedTotalPrice = computed(() => {
 
 const formattedPricePerPerson = computed(() => {
   if (!rawTotalPrice.value || numberOfPeople.value === 0) return '';
-  const pricePerPerson = rawTotalPrice.value / numberOfPeople.value;
+  if (isFlatRate.value) {
+    return new Intl.NumberFormat('th-TH', {
+      style: 'currency',
+      currency: 'THB',
+      minimumFractionDigits: 0,
+    }).format(rawTotalPrice.value / numberOfPeople.value);
+  }
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
     currency: 'THB',
     minimumFractionDigits: 0,
-  }).format(pricePerPerson);
+  }).format(15);
 });
-
 
 const polylineOptions = computed(() => ({
   path: routePolyline.value,
@@ -214,7 +210,7 @@ const calculateRoute = () => {
 
 const updatePeople = (amount) => {
   const newAmount = numberOfPeople.value + amount;
-  if (newAmount >= 1 && newAmount <= 8) { // Max 8 people
+  if (newAmount >= 1 && newAmount <= maxPeople.value) {
     numberOfPeople.value = newAmount;
   }
 };
@@ -255,206 +251,259 @@ watch(destination, (newDestination) => {
     calculateRoute();
   }
 });
+
+watch(isFlatRate, (val) => {
+  if (val && numberOfPeople.value > 12) {
+    numberOfPeople.value = 12;
+  }
+  if (!val && numberOfPeople.value > 8) {
+    numberOfPeople.value = 8;
+  }
+});
 </script>
 
 <style scoped>
-/* Keep existing styles, add new ones for price-per-person if needed */
-
 .booking-form {
-  max-width: 500px;
-  margin: auto;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px 16px 16px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(102,126,234,0.13);
 }
 
 .details-panel {
-  padding: 16px;
+  margin-top: 20px;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  width: 100%;
 }
 
 .instructions {
   text-align: center;
-  padding: 16px;
-  background-color: #eef7ff;
+  padding: 25px;
+  background: #e3f2fd;
   border-radius: 8px;
-  margin-bottom: 16px;
-  color: #333;
+  margin-bottom: 25px;
+  width: 100%;
 }
 
-.trip-summary h3,
-.payment-section h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: #333;
-  font-size: 1.1em;
+.instructions p {
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: #1976d2;
+}
+
+.trip-summary {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.trip-summary h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  text-align: center;
 }
 
 .summary-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 0.95em;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid #eee;
-  margin: 16px 0;
+.summary-item:last-child {
+  border-bottom: none;
 }
 
 .form-group {
-  margin-bottom: 16px;
+  margin: 20px 0;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  font-weight: 500;
-  color: #555;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
 .people-input {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the input and buttons */
-  gap: 8px; /* Space between items */
+  gap: 10px;
+  margin-bottom: 15px;
 }
-
-.people-input input {
-  width: 50px; /* Adjust width as needed */
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 8px; /* More rounded corners for input */
-  padding: 8px 0; /* Vertical padding only */
-  -moz-appearance: textfield; /* Firefox */
-  font-size: 1em;
-  font-weight: bold;
-}
-.people-input input::-webkit-outer-spin-button,
-.people-input input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 
 .people-input button {
-  width: 40px; /* Larger, more tappable buttons */
+  width: 40px;
   height: 40px;
-  border: 1px solid #007bff; /* Blue border for buttons */
-  background-color: #007bff; /* Blue background */
-  color: white; /* White text */
-  border-radius: 50%; /* Perfectly round */
-  font-size: 1.5em; /* Larger +/- symbols */
+  border: none;
+  border-radius: 50%;
+  background: #667eea;
+  color: white;
+  font-size: 1.2em;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .people-input button:hover:not(:disabled) {
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background: #5a6fd8;
+  transform: scale(1.05);
 }
 
 .people-input button:disabled {
-  background-color: #e0e0e0;
-  border-color: #e0e0e0;
-  color: #a0a0a0;
+  background: #ccc;
   cursor: not-allowed;
 }
 
+.people-input input {
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.flat-rate-toggle {
+  margin-top: 10px;
+}
+
+.flat-rate-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  color: #666;
+}
+
+.flat-rate-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
 
 .price-summary {
-  background-color: #e6f4ea;
-  border: 1px solid #b7e1c7;
-  border-radius: 8px;
-  padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  margin-top: 15px;
 }
 
-.price-summary .car-type {
-  font-weight: 500;
-  color: #2b613b;
+.car-type {
+  font-weight: 600;
+  font-size: 1.1em;
 }
 
-/* Updated styles for displaying total and per person */
-.price-summary > div { /* This targets the new div wrapping prices */
-  text-align: right;
+.total-price-display {
+  font-size: 1.3em;
+  font-weight: 700;
 }
 
-.price-summary .total-price-display {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #1e462a;
-}
-
-.price-summary .price-per-person {
+.price-per-person {
   font-size: 0.9em;
-  color: #555;
-  margin-top: 4px;
+  opacity: 0.9;
 }
 
+.payment-section {
+  margin: 25px 0;
+  width: 100%;
+}
+
+.payment-section h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  text-align: center;
+}
 
 .payment-options {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .payment-options button {
-  flex-grow: 1;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background: white;
+  color: #666;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1em; /* Ensure consistent font size */
-  font-weight: 500; /* Make text slightly bolder */
+  transition: all 0.3s ease;
+  min-height: 60px;
 }
 
-/* Specific styling for Cash button */
-.payment-options button:nth-child(1).active { /* Targets the first button (Cash) when active */
-  background-color: #007bff;
+.payment-options button:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.payment-options button.active {
+  border-color: #667eea;
+  background: #667eea;
   color: white;
-  border-color: #007bff;
-  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
 }
-
-/* Specific styling for PromptPay button */
-.payment-options button:nth-child(2).active { /* Targets the second button (PromptPay) when active */
-  background-color: #673AB7; /* Deep Purple */
-  color: white;
-  border-color: #673AB7;
-  box-shadow: 0 2px 6px rgba(103, 58, 183, 0.3); /* Matching purple shadow */
-}
-
 
 .request-button {
   width: 100%;
-  padding: 15px;
-  font-size: 1.1em;
-  font-weight: bold;
-  color: white;
-  background-color: #007bff;
+  padding: 18px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+  font-size: 1.2em;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.request-button:disabled {
-  background-color: #a0c3e6;
-  cursor: not-allowed;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  min-height: 60px;
 }
 
 .request-button:hover:not(:disabled) {
-  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.request-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .details-panel {
+    padding: 15px;
+  }
+  
+  .trip-summary {
+    padding: 15px;
+  }
+  
+  .payment-options {
+    flex-direction: column;
+  }
+  
+  .people-input {
+    justify-content: center;
+  }
 }
 </style>
